@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 06:03:12 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/02/19 00:13:07 by tjukmong         ###   ########.fr       */
+/*   Updated: 2023/02/19 00:21:34 by tjukmong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static void	print_manual(void)
 	ft_putstr_fd("	[A / D]: Change shader\n", 1);
 	ft_putstr_fd("	[H]: Go back to home (origin, 0+0i).\n", 1);
 	ft_putstr_fd("	[Esc]: Exit application.\n\n\033[93m", 1);
-	ft_putstr_fd("Note: on OSX, the key [Ctrl] is replaced with [Cmd].\n", 1);
 	ft_putstr_fd("\033[0m\n", 1);
 }
 
