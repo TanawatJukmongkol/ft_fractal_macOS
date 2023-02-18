@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 10:19:03 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/02/18 18:12:18 by tjukmong         ###   ########.fr       */
+/*   Updated: 2023/02/18 23:42:56 by tjukmong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,66 +14,30 @@
 
 int	key_event(int code, t_vars *vars)
 {
-	if (code == kdef_mod)
-		vars->keys |= kbit_mod;
-	else if (code == kdef_up)
-		vars->keys |= kbit_up;
-	else if (code == kdef_down)
-		vars->keys |= kbit_down;
-	else if (code == kdef_left)
-		vars->keys |= kbit_left;
-	else if (code == kdef_right)
-		vars->keys |= kbit_right;
-	else if (code == kdef_term)
+	if (code == 53) // escape
 		close_window(vars);
-	if (vars->keys & kbit_mod)
-		return (mod_key(code, vars));
-	vars->cam.x += 0.4 * (((vars->keys & kbit_right) != 0)
-			- ((vars->keys & kbit_left) != 0)) / (vars->cam.zoom * 4);
-	vars->cam.y -= 0.4 * (((vars->keys & kbit_down) > 0)
-			- ((vars->keys & kbit_up) > 0)) / (vars->cam.zoom * 4);
-	vars->draw_ittr = 0;
-	return (0);
-}
-
-int	mod_key(int code, t_vars *vars)
-{
-	vars->draw_ittr = 0;
-	if (code == kmod_origin)
-		vars->keys |= kbit_origin;
-	else if (code == kmod_color)
-		vars->keys |= kbit_color;
-	if (vars->keys == (kbit_mod | kbit_up))
+	if (code == 126) // up
+		vars->cam.y += 0.4 / (vars->cam.zoom * 4);
+	else if (code == 125) // down
+		vars->cam.y -= 0.4 / (vars->cam.zoom * 4);
+	if (code == 123) // left
+		vars->cam.x -= 0.4 / (vars->cam.zoom * 4);
+	else if (code == 124) // right
+		vars->cam.x += 0.4 / (vars->cam.zoom * 4);
+	
+	if (code == 13) // w
+		change_color_scheme(1, vars);
+	else if (code == 1) // s
+		change_color_scheme(2, vars);
+	if (code == 0) // a
+		change_color_scheme(3, vars);
+	else if (code == 2) // d
+		change_color_scheme(4, vars);
+	if (code == 34)
 		vars->cam.zoom *= 1.08;
-	else if (vars->keys == (kbit_mod | kbit_down) && vars->cam.zoom > 0.08)
+	if (code == 31)
 		vars->cam.zoom /= 1.08;
-	else if (vars->keys == (kbit_mod | kbit_origin))
-	{
-		vars->cam.x = 0;
-		vars->cam.y = 0;
-		vars->cam.zoom = 1;
-	}
-	else
-		change_color_scheme(code, vars);
-	return (0);
-}
-
-int	key_released(int code, t_vars *vars)
-{
-	if (code == kdef_mod)
-		vars->keys &= ~kbit_mod;
-	else if (code == kdef_up)
-		vars->keys &= ~kbit_up;
-	else if (code == kdef_down)
-		vars->keys &= ~kbit_down;
-	else if (code == kdef_left)
-		vars->keys &= ~kbit_left;
-	else if (code == kdef_right)
-		vars->keys &= ~kbit_right;
-	else if (code == kmod_origin)
-		vars->keys &= ~kbit_origin;
-	else if (code == kmod_color)
-		vars->keys &= ~kmod_color;
+	vars->draw_ittr = 0;
 	return (0);
 }
 

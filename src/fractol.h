@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:51:56 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/02/18 17:55:31 by tjukmong         ###   ########.fr       */
+/*   Updated: 2023/02/18 23:44:10 by tjukmong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@
 
 enum	e_keydef {
 	kdef_term	= 53,
-	kdef_mod	= 261,
+	kdef_mod	= 13,
 	kdef_up		= 126,
 	kdef_down	= 125,
 	kdef_left	= 123,
 	kdef_right	= 124,
 	kmod_origin	= 31,
-	kmod_color	= 257
+	kmod_color	= 14
 };
 
 enum	e_mousedef {
@@ -119,17 +119,14 @@ void	mlx_error(t_vars *vars, char *msg);
 
 // MLX event listeners
 int		key_event(int code, t_vars *vars);
-int		mod_key(int code, t_vars *vars);
-int		key_released(int code, t_vars *vars);
 int		mouse_event(int code, int x, int y, t_vars *vars);
-int		mouse_released(int code, int x, int y, t_vars *vars);
 int		mouse_event_move(int x, int y, t_vars *vars);
 
 // Graphics
 void	ft_init_image(t_vars *vars);
 void	ft_draw_point(t_image *img, int x, int y, unsigned int color_hex);
 void	ft_put_image(t_image *img, int x, int y);
-void	change_color_scheme(int code, t_vars *vars);
+int		change_color_scheme(int code, t_vars *vars);
 
 // Shaders
 void	shader_1(t_vars *vars, int draw_ittr);

@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 08:20:50 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/02/18 10:19:15 by tjukmong         ###   ########.fr       */
+/*   Updated: 2023/02/18 23:29:02 by tjukmong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,30 +52,31 @@ void	ft_put_image(t_image *img, int x, int y)
 	mlx_put_image_to_window(img->mlx.mlx_ptr, img->mlx.win_ptr, img->ptr, x, y);
 }
 
-void	change_color_scheme(int code, t_vars *vars)
+int	change_color_scheme(int code, t_vars *vars)
 {
-	if (vars->keys == (kbit_mod | kbit_color | kbit_up))
+	if (code == 1)
 	{
 		if (vars->scheme++ >= vars->scheme_len)
 			vars->scheme = 0;
 		vars->colors = vars->schemes[vars->scheme];
 	}
-	else if (vars->keys == (kbit_mod | kbit_color | kbit_down))
+	else if (code == 2)
 	{
 		if (vars->scheme-- <= 0)
 			vars->scheme = vars->scheme_len;
 		vars->colors = vars->schemes[vars->scheme];
 	}
-	else if (vars->keys == (kbit_mod | kbit_color | kbit_left))
+	else if (code == 3)
 	{
 		if (vars->renderer++ >= vars->renderer_len)
 			vars->renderer = 0;
 		vars->update = vars->renderers[vars->renderer];
 	}
-	else if (vars->keys == (kbit_mod | kbit_color | kbit_right))
+	else if (code == 4)
 	{
 		if (vars->renderer-- <= 0)
 			vars->renderer = vars->renderer_len;
 		vars->update = vars->renderers[vars->renderer];
 	}
+	return (0);
 }
