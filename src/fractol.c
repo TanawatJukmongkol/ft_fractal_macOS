@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:49:59 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/02/18 23:44:21 by tjukmong         ###   ########.fr       */
+/*   Updated: 2023/02/19 00:07:39 by tjukmong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,11 @@ int	main(int argc, char **argv)
 	init_vars(&vars);
 	ft_init_image(&vars);
 	mlx_hook(vars.mlx.win_ptr, 17, 0L, close_window, &vars);
-	mlx_hook(vars.mlx.win_ptr, 4, (1L<<2), mouse_event, &vars);
-	mlx_hook(vars.mlx.win_ptr, 6, (1L<<9),
+	mlx_hook(vars.mlx.win_ptr, 4, (1L << 2), mouse_event, &vars);
+	mlx_hook(vars.mlx.win_ptr, 5, (1L << 3), mouse_released, &vars);
+	mlx_hook(vars.mlx.win_ptr, 6, (1L << 9),
 		mouse_event_move, &vars);
-	mlx_hook(vars.mlx.win_ptr, 2, (1L<<0), key_event, &vars);
+	mlx_hook(vars.mlx.win_ptr, 2, (1L << 0), key_event, &vars);
 	mlx_loop_hook(vars.mlx.mlx_ptr, loop, &vars);
 	mlx_loop(vars.mlx.mlx_ptr);
 	return (0);

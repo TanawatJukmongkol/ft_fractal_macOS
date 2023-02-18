@@ -6,30 +6,28 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 05:51:56 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/02/18 23:44:10 by tjukmong         ###   ########.fr       */
+/*   Updated: 2023/02/19 00:08:28 by tjukmong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-#include <stdio.h>
+# include <math.h>
 
-#include <math.h>
+# include "../mlx/mlx.h"
+# include "../lib/libft/libft.h"
 
-#include "../mlx/mlx.h"
-#include "../lib/libft/libft.h"
-
-enum	e_keydef {
-	kdef_term	= 53,
-	kdef_mod	= 13,
-	kdef_up		= 126,
-	kdef_down	= 125,
-	kdef_left	= 123,
-	kdef_right	= 124,
-	kmod_origin	= 31,
-	kmod_color	= 14
-};
+# define ESCAPE 53
+# define UP 126
+# define DOWN 125
+# define LEFT 123
+# define RIGHT 124
+# define COLOR_NEXT 13
+# define COLOR_PREV 1
+# define SHAD_NEXT 0
+# define SHAD_PREV 2
+# define ORIGIN 4
 
 enum	e_mousedef {
 	mouse_Left			= 1,
@@ -37,16 +35,6 @@ enum	e_mousedef {
 	mouse_Middle		= 3,
 	mouse_Middle_Down	= 4,
 	mouse_Middle_Up		= 5
-};
-
-enum	e_keybit {
-	kbit_mod	= 0b00000001,
-	kbit_up		= 0b00000010,
-	kbit_down	= 0b00000100,
-	kbit_left	= 0b00001000,
-	kbit_right	= 0b00010000,
-	kbit_origin	= 0b00100000,
-	kbit_color	= 0b01000000
 };
 
 typedef struct s_mlx {
@@ -120,6 +108,7 @@ void	mlx_error(t_vars *vars, char *msg);
 // MLX event listeners
 int		key_event(int code, t_vars *vars);
 int		mouse_event(int code, int x, int y, t_vars *vars);
+int		mouse_released(int code, int x, int y, t_vars *vars);
 int		mouse_event_move(int x, int y, t_vars *vars);
 
 // Graphics

@@ -6,7 +6,7 @@
 /*   By: tjukmong <tjukmong@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 06:03:12 by tjukmong          #+#    #+#             */
-/*   Updated: 2023/02/18 22:36:42 by tjukmong         ###   ########.fr       */
+/*   Updated: 2023/02/19 00:13:07 by tjukmong         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ static void	print_manual(void)
 	ft_putstr_fd("	im(aginary): -2000 to 2000 (maps to -2.000 to 2.000)\n\n", 1);
 	ft_putstr_fd("\033[96mKey bindings:\033[0m\n", 1);
 	ft_putstr_fd("	[Arrow keys]: Pans the camera\n", 1);
-	ft_putstr_fd("	[Ctrl]+[up / down]: zoom in (locked to center)\n", 1);
-	ft_putstr_fd("	[Ctrl]+[Shift]+[up / down]: Change color scheme\n", 1);
-	ft_putstr_fd("	[Ctrl]+[Shift]+[left / right]: Change shader\n", 1);
-	ft_putstr_fd("	[Ctrl]+[o]: Go back to origin (0+0i).\n", 1);
+	ft_putstr_fd("	[I / O]: Zooms in and out\n", 1);
+	ft_putstr_fd("	[W / S]: Change color scheme\n", 1);
+	ft_putstr_fd("	[A / D]: Change shader\n", 1);
+	ft_putstr_fd("	[H]: Go back to home (origin, 0+0i).\n", 1);
 	ft_putstr_fd("	[Esc]: Exit application.\n\n\033[93m", 1);
 	ft_putstr_fd("Note: on OSX, the key [Ctrl] is replaced with [Cmd].\n", 1);
 	ft_putstr_fd("\033[0m\n", 1);
@@ -39,14 +39,10 @@ static void	man_error(char *msg)
 	exit(1);
 }
 
-void	options(t_vars *vars, int ac, char **opt)
+static void	opt_switch(t_vars *vars, int ac, char **opt)
 {
 	int	frac;
 
-	if (ac < 2)
-		man_error("Not enough argument passed!");
-	if (!ft_isdigit(*opt[1]))
-		man_error("Invalid argument type.");
 	frac = ft_atoi(opt[1]);
 	if (frac == 0)
 		vars->fractol = &mandelbrot_set;
@@ -67,6 +63,17 @@ void	options(t_vars *vars, int ac, char **opt)
 		vars->fractol = &burning_ship;
 	else
 		man_error("Invalid fractal selection.");
+}
+
+void	options(t_vars *vars, int ac, char **opt)
+{
+	int	frac;
+
+	if (ac < 2)
+		man_error("Not enough argument passed!");
+	if (!ft_isdigit(*opt[1]))
+		man_error("Invalid argument type.");
+	opt_switch(vars, ac, opt);
 }
 
 void	init_vars(t_vars *vars)
